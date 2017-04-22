@@ -1,0 +1,60 @@
+{
+    "_id" : ObjectId("58fb9cb5607d2ee72475c827"),
+    "host_id" : ObjectId("58fb71189cbf96103d8ebd4b"),
+    "date" : ISODate("2017-05-07T01:26:20.201Z"),
+    "time_from" : ISODate("2017-05-06T10:00:57.240Z"),
+    "time_until" : ISODate("2017-05-06T11:50:57.240Z"),
+    "description" : "awesome vegan food with costumes",
+    "isCookingShared" : true,
+    "max_guest" : 10
+},
+{
+    "_id" : ObjectId("58fb9fd9607d2ee72475c8dc"),
+    "host_id" : ObjectId("58fb71d39cbf96103d8ebd4c"),
+    "date" : ISODate("2017-08-11T04:30:20.201Z"),
+    "time_from" : ISODate("2017-08-10T10:00:00.240Z"),
+    "time_until" : ISODate("2017-08-10T14:00:00.240Z"),
+    "description" : "random sandwiches and watching the big football world cup final event",
+    "isCookingShared" : false,
+    "max_guest" : 7
+},
+{
+    "_id" : ObjectId("58fb9ffb607d2ee72475c8e0"),
+    "host_id" : ObjectId("58fb729a9cbf96103d8ebd4d"),
+    "date" : ISODate("2019-01-01T08:51:20.201Z"),
+    "time_from" : ISODate("2018-12-31T20:00:00.240Z"),
+    "time_until" : ISODate("2019-01-01T10:30:00.240Z"),
+    "description" : "celebrating new years eve",
+    "isCookingShared" : false,
+    "max_guest" : 100
+},
+{
+    "_id" : ObjectId("58fba00e607d2ee72475c8f4"),
+    "host_id" : ObjectId("58fb729a9cbf96103d8ebd4d"),
+    "date" : ISODate("2017-04-11T00:30:20.201Z"),
+    "time_from" : ISODate("2017-04-10T14:00:00.240Z"),
+    "time_until" : ISODate("2017-04-10T21:50:00.240Z"),
+    "description" : "birthday bash party with local expats",
+    "isCookingShared" : true,
+    "max_guest" : 50
+},
+{
+    "_id" : ObjectId("58fba018607d2ee72475c8f6"),
+    "host_id" : ObjectId("58fb742d9cbf96103d8ebd4f"),
+    "date" : ISODate("2017-09-15T05:34:20.201Z"),
+    "time_from" : ISODate("2017-09-14T20:00:00.240Z"),
+    "time_until" : ISODate("2017-09-14T23:50:00.240Z"),
+    "description" : "let's cook some random stuff, bring your own ideas, we will make it happen",
+    "isCookingShared" : true,
+    "max_guest" : 5
+},
+{
+    "_id" : ObjectId("58fba024607d2ee72475c8f8"),
+    "host_id" : ObjectId("58fb71d39cbf96103d8ebd4c"),
+    "date" : ISODate("2018-05-31T01:50:20.201Z"),
+    "time_from" : ISODate("2018-05-30T20:00:00.240Z"),
+    "time_until" : ISODate("2018-05-30T23:50:00.240Z"),
+    "description" : "this is my graduation, I don't want to celebrate alone",
+    "isCookingShared" : true,
+    "max_guest" : 20
+}
