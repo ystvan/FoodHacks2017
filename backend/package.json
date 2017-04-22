@@ -1,0 +1,11 @@
+{
+  "name": "foodhacks_backend",
+  "version": "0.0.1",
+  "description": "The Backend interface for foodhacks17",
+  "main": "index.js",
+  "license": "WTFPL",
+  "dependencies": {
+    "express": "^4.15.2",
+    "mongodb": "^2.2.26"
+  }
+}
