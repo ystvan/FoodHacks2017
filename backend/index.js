@@ -8,7 +8,8 @@ var express = require("express"),
     mongoClient = require("mongodb").MongoClient,
     ObjectId = require('mongodb').ObjectID;
 
-let db_url = "mongodb://localhost:27017/foodhack";
+const db_url = "mongodb://localhost:27017/foodhack";
+const TAGS = ["vegan", "vegetarian", "traditional", "dessert", "glutenfree", "lowcarb"]
 
 function database_request(dbCB)
 {
@@ -25,6 +26,32 @@ function database_get(db, collectionName, findJson, getCB)
 	assert.equal(err, null);
 	getCB(data);
     });
+}
+
+
+function tags_to_int(tags)
+{
+    int = 0;
+    for(t in tags)
+    {
+	i = TAGS.indexOf(t);
+	if(i !== -1)
+	    int += 2 ** i;
+    }
+    return int;
+}
+
+function int_to_tags(int)
+{
+    i = 0;
+    tags = [];
+    while(int !== 0)
+    {
+	if(int % 2 == 1)
+	    tags.push(TAGS[i])
+	i += 1;
+    }
+    return tags;
 }
 
 function database_insert(db, collectionName, json)
@@ -79,12 +106,6 @@ function create_event(event, statusCB)
     });
 }
 
-function delete_event(event, statusCB)
-{
-    
-}
-
-
 // Express methods
 server.listen(port);
 
@@ -120,6 +141,35 @@ app.get("/events/:eventId", (req, res) => {
 });
 
 app.get("/search_events", (req, res) => {
+    events = []
+    search = req.body;
+    if(search.tags !== [])
+	i = tags_to_int(search.tags);
+    else
+	i = 0;
+    
+    database_request((db) => {
+	database_get(db, "events", { $where: function() { return (this.tags == i || i == 0); } }, (data) => {
+	    // Search for cities and languages
+	    jso = {}
+	    if(search.cities != [])
+		jso.city = { $in: search.cities };
+	    if(search.languages != [])
+		jso.languages = { $in: search.languages }
+	    
+	    for(d in data)
+	    {
+		jso.username = d.hostname;
+		database_get(db, "users", jso, (da) => {
+		    if(da.length !== 0)
+			events.push(d);
+		});
+	    }
+	    
+	    db.close();
+	});
+    });
+    res.json(events);
 });
 
 app.get("/user/:username", (req, res) => {
@@ -133,6 +183,15 @@ app.get("/user/:username", (req, res) => {
 	    }
 	    db.close();
 	})
+    });
+});
+
+app.get("/user", (req, res) => {
+    database_request((db) => {
+	database_get(db, "users", {}, (data) => {
+	    res.json(data);
+	    db.close();
+	}
     });
 });
 
@@ -181,30 +240,25 @@ app.post("/cancel/:eventId/:username", (req, res) => {
 		db.close();
 	    } else {
 		let e = data[0];
-		if(e.guests.length === e.max_guest) {
-		    sendResponse(false, "Event is full");
-		    db.close();
-		} else {
-		    database_get(db, "users", {username: req.params.username}, (data) => {
-			if(data.length === 0) {
-			    sendResponse(false, "User not found");
-			    db.close();
-			} else if(!e.guests.includes(req.params.username)) {
-			    sendResponse(false, "User isn't a guest");
-			    db.close();
-			} else {
-			    // Everything's fine, update db
-			    e.guests.splice(e.guests.indexOf(req.params.username), 1);
-			    
-			    console.log(e.guests);
-			    database_update(db, "events", {_id: new ObjectId(req.params.eventId)}, { $set: {guests:e.guests}});
-			    sendResponse(true, "OK");
-			    db.close();
-			}
-		    });
-		}
+		database_get(db, "users", {username: req.params.username}, (data) => {
+		    if(data.length === 0) {
+			sendResponse(false, "User not found");
+			db.close();
+		    } else if(!e.guests.includes(req.params.username)) {
+			sendResponse(false, "User isn't a guest");
+			db.close();
+		    } else {
+			// Everything's fine, update db
+			e.guests.splice(e.guests.indexOf(req.params.username), 1);
+			
+			console.log(e.guests);
+			database_update(db, "events", {_id: new ObjectId(req.params.eventId)}, { $set: {guests:e.guests}});
+			sendResponse(true, "OK");
+			db.close();
+		    }
+		});
 	    }
-	});
+	}
     });
 });
 
