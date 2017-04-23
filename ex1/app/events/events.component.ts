@@ -9,13 +9,21 @@ import { AlertService, UserService , EventService} from '../_services/index';
 })
 
 export class EventsComponent implements OnInit {
-   
-events: Event;
+    items: any[];
+events: Event[] = [];
     constructor(
         private router: Router,
         private userService: UserService,
         private alertService: AlertService,
 		private eventService: EventService) { }
+
+    createRange(number){
+        this.items = [];
+        for(var i = 1; i <= number; i++){
+            this.items.push(i);
+        }
+        return this.items;
+    }
 
     ngOnInit()
 	{
