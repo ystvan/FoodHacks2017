@@ -1,7 +1,28 @@
-﻿a {
+a {
     cursor: pointer;
 }
 
 .help-block {
+    font-size: 12px;
+}
+
+.panel-footer.row {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.red {
+    color:darkred;
+}
+.green {
+    color:green;
+}
+
+p.navbar-text {
     font-size: 12px;
 }
