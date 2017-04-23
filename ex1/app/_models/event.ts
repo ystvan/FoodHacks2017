@@ -1,10 +1,13 @@
 export class Event 
 {
- hostname: string;
-  date : string;
-  time_from: string;
-  time_until : string;
-  description : string;
-  isCookingShared : string;
-  max_guest : number;
+    id: number;
+    title: string;
+    host: string;
+	languages: string;
+	date: string;
+	time: string;
+	description: string;
+	cooking_shared: string;
+	max_guest: number;
+	imageUrl: string;
 }
