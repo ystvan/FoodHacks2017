@@ -1,0 +1,13 @@
+<div class="col-md-6 col-md-offset-3">
+
+    <h3>All Events:</h3>
+    <ul>
+        <li *ngFor="let eventt of events">
+            {{eventt.date}}    ,   {{eventt.hostname}}       
+        </li>
+		<li > {{events}} </li>
+    </ul>
+    <p><a [routerLink]="['/']">Back</a></p>
+
+
+</div>	
