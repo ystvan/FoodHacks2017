@@ -1,13 +1,35 @@
-<div class="col-md-6 col-md-offset-3">
 
-    <h3>All Events:</h3>
-    <ul>
-        <li *ngFor="let eventt of events">
-            {{eventt.date}}    ,   {{eventt.hostname}}       
-        </li>
-		<li > {{events}} </li>
-    </ul>
+
+    <h3>Upcoming Dinners</h3>
+
+
+    <div class="panel-group" *ngFor="let e of events">
+        <div class="panel panel-default row">
+            <div class="panel-heading">
+                {{e.title}}
+            </div>
+            <div class="panel-body row">
+                    <div class="col-sm-4">
+                        <b>Host</b> <br /> {{e.host}} <br />
+                        <b>Spoken languages</b> <br /> {{e.languages}} <br />
+                    </div>
+                    <div class="col-sm-5"><b>Description</b><br />{{e.description}}</div>
+                    <div class="col-sm-3 img-ph">
+                        image
+                    </div>
+            </div>
+            <div class="panel-footer row">
+                <div class="col-sm-6">{{e.date}} {{e.time}}</div>
+                <div class="col-sm-6 right">
+                    <span class="glyphicon glyphicon-user red" *ngFor="let object of createRange(3)" aria-hidden="true"> </span>
+                    <span class="glyphicon glyphicon-user green" *ngFor="let object of createRange(2)"  aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <p><a [routerLink]="['/']">Back</a></p>
 
 
-</div>	
