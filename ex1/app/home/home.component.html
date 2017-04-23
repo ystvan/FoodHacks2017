@@ -1,6 +1,27 @@
-﻿<div class="col-md-6 col-md-offset-3">
-    <h1>Hi {{currentUser.firstName}}!</h1>
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+<p class="navbar-text navbar-right">
+    Signed in as {{currentUser.firstName}}
+    <a [routerLink]="['/login']" class="navbar-link">Logout</a>
+    </p>
+    </div>
+</div>
+<!--
     <p><a [routerLink]="['/create']">Create a new Event!</a></p>
     <p><a [routerLink]="['/events']">List of All Events:</a></p>
     <p><a [routerLink]="['/login']">Logout</a></p>
-</div>
+-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-brand" [routerLink]="['/events']">Upcoming Dinners</a></li>
+                <li><a class="navbar-brand" [routerLink]="['/create']">Host Dinner</a></li>
+            </ul>
+        </div>
+
+    </div><!-- /.container-fluid -->
+</nav>
+
